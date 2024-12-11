@@ -12,18 +12,18 @@ def get_data_list(csv_file_name):
     """
     data_list = []
     try:
-        with open(csv_file_name, 'r') as file:
-            csv_reader = csv.reader(file)
+        with open(csv_file_name, 'r', newline='') as csv_file:
+            csv_reader = csv.reader(csv_file)
             next(csv_reader)
             for row in csv_reader:
-                numeric_row = [row[0], row[1]] + [float(x) for x in row[2:]]
-                data_list.append(numeric_row)
+                num_row = [row[0], row[1]] + [float(x) for x in row[2:]]
+                data_list.append(num_row)
         return data_list
     except FileNotFoundError:
-        print(f"Error: File {csv_file_name} not found. Please try again.")
+        print(f"Error: File {csv_file_name} not found. Please try again!!\n")
         sys.exit(1)
     except ValueError:
-        print(f"Error: Invalid data in {csv_file_name}. Please check the affected fields.")
+        print(f"Error: Invalid data in {csv_file_name}\n.Please check row {row}.\n")
         sys.exit(1)
 
 def calculate_student_averages(data_list):
@@ -275,7 +275,7 @@ def main():
         f.write(f"The SID is {lowest_cs_student_term_two}\n")
         f.write(f"The subject is {highest_trend_subject}\n")
     
-    print("Analysis complete. Results written to StudentScoresAnalysis.txt")
+    print("Analysis complete\n.Results written to StudentScoresAnalysis.txt\n")
 
 if __name__ == "__main__":
     main()
