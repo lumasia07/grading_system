@@ -2,6 +2,8 @@
 import csv
 import sys
 
+subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
+
 def get_data_list(csv_file_name):
     """
     Reads data contained in a CSV file & returns a list of lists containing student performance data.
@@ -87,7 +89,6 @@ def calculate_class_averages(data_list):
     """
 
     """Subjects (excluding SID and Term)"""
-    subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
     class_averages_list = []
     
     for term in ['1', '2']:
@@ -110,7 +111,6 @@ def identify_highest_achieving_students(data_list):
     """
 
     """Subjects (excluding SID and Term)"""
-    subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
     highest_achieving_students_list = []
     
     for term in ['1', '2']:
@@ -145,7 +145,6 @@ def identify_lowest_achieving_students(data_list):
     """
 
     """Subjects (excluding SID and Term)"""
-    subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
     lowest_achieving_students_list = []
     
     for term in ['1', '2']:
@@ -182,8 +181,6 @@ def analyze_performance_trends(data_list):
     """Get class averages"""
     class_averages = calculate_class_averages(data_list)
     
-    """Subjects in question"""
-    subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
     performance_trend_list = []
     
     for subject in subjects:
