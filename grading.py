@@ -59,7 +59,7 @@ def calculate_student_averages(data_list):
             students[sid][term] = scores
 
         except (IndexError, ValueError) as e:
-            print(f"Error processing row {row}: {e}")
+            print(f"Error processing data in {row}: {e}")
 
     """Calculate student averages"""
     try:
@@ -74,31 +74,43 @@ def calculate_student_averages(data_list):
     except ZeroDivisionError as e:
         print(f"Error calculating average: {e}")
         return []
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        return []
+
 
 
 def calculate_class_averages(data_list):
     """
     Calculates class averages for each subject in each term.
-    Args:
-        data_list: List of student performance data
-    Return:
-        List of class averages for each subject in each term
-    """
-
-    """Subjects (excluding SID and Term)"""
-    class_averages_list = []
     
+    Args:
+        data_list: List of student performance data.
+    
+    Return:
+        List of class averages for each subject in each term.
+    """
+    class_averages_list = []
+
     for term in ['1', '2']:
         for subject_index, subject in enumerate(subjects):
-            subject_scores = [row[subject_index+2] for row in data_list if row[1] == term]
-            
-            if subject_scores:
-                class_average = sum(subject_scores) / len(subject_scores)
-                class_averages_list.append([term, subject, class_average])
-    
+            try:
+                subject_scores = [
+                    row[subject_index + 2] for row in data_list if row[1] == term
+                ]
+
+                scores = [score for score in subject_scores if isinstance(score, (int, float))]
+
+                if scores:
+                    class_average = sum(scores) / len(scores)
+                    class_averages_list.append([term, subject, class_average])
+                else:
+                    print(f"No valid scores for {subject} in term {term}.")
+
+            except IndexError as e:
+                print(f"Error while processing subject '{subject}' in term '{term}': {e}")
+            except ZeroDivisionError as e:
+                print(f"Error calculating average for {subject} in term {term}: {e}")
+            except Exception as e:
+                print(f"Unexpected error processing {subject} in term {term}: {e}")
+
     return class_averages_list
 
 def identify_highest_achieving_students(data_list):
@@ -110,7 +122,6 @@ def identify_highest_achieving_students(data_list):
         List of highest-achieving students for each subject in each term
     """
 
-    """Subjects (excluding SID and Term)"""
     highest_achieving_students_list = []
     
     for term in ['1', '2']:
@@ -119,7 +130,7 @@ def identify_highest_achieving_students(data_list):
                 row for row in data_list 
                 if row[1] == term
             ]
-            
+
             if term_subject_data:
                 """Finds highest score and corresponding student"""
                 highest_score_row = max(
