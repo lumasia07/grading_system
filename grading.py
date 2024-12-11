@@ -22,42 +22,60 @@ def get_data_list(csv_file_name):
     except FileNotFoundError:
         print(f"Error: File {csv_file_name} not found. Please try again!!\n")
         sys.exit(1)
-    except ValueError:
-        print(f"Error: Invalid data in {csv_file_name}\n.Please check row {row}.\n")
-        sys.exit(1)
 
 def calculate_student_averages(data_list):
     """
     Calculates average scores for each student in each term.
+
     Args:
-        data_list: Main list of student performance data
+        data_list: Main list of student performance data.
+
     Return:
-        List of student averages
+        List of student averages for each student in each term.
     """
     student_averages_list = []
-    
-    """Group data by student and term"""
+
+    """Group data by SID and term"""
     students = {}
     for row in data_list:
-        sid, term = row[0], row[1]
-        scores = row[2:]
+        try:
+            sid, term = row[0], row[1]
+            scores = row[2:]
+
+            if not isinstance(sid, str) or not isinstance(term, str):
+                raise ValueError(f"Invalid SID or Term format in row: {row}")
+
+            if not all(isinstance(score, (int, float)) for score in scores):
+                raise ValueError(f"Invalid score format in row: {row}")
+
+            if sid not in students:
+                students[sid] = {}
+
+            if term not in students[sid]:
+                students[sid][term] = []
+
+            students[sid][term] = scores
+
+        except (IndexError, ValueError) as e:
+            print(f"Error processing row {row}: {e}")
+
+    """Calculate student averages"""
+    try:
+        for sid, student_terms_data in students.items():
+            for term, scores in student_terms_data.items():
+                if scores:
+                    average_score = sum(scores) / len(scores)
+                    student_averages_list.append([term, sid, average_score])
         
-        if sid not in students:
-            students[sid] = {}
-        
-        if term not in students[sid]:
-            students[sid][term] = []
-        
-        students[sid][term] = scores
-    
-    """Calculates student averages"""
-    for sid, student_terms_data in students.items():
-        for term, scores in student_terms_data.items():
-            if scores:
-                average_score = sum(scores) / len(scores)
-                student_averages_list.append([term, sid, average_score])
-    
-    return student_averages_list
+        return student_averages_list
+
+    except ZeroDivisionError as e:
+        print(f"Error calculating average: {e}")
+        return []
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return []
+
 
 def calculate_class_averages(data_list):
     """
