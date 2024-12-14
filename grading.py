@@ -5,6 +5,7 @@ import sys
 """List of subjects"""
 subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
 
+
 def get_data_list(csv_file_name) -> list:
     """
     Reads data contained in a CSV file & returns a list of lists containing student performance data.
@@ -25,6 +26,7 @@ def get_data_list(csv_file_name) -> list:
     except FileNotFoundError:
         print(f"Error: File {csv_file_name} not found. Please try again!!\n")
         sys.exit(1)
+
 
 def calculate_student_averages(data_list) -> list:
     """
@@ -77,7 +79,6 @@ def calculate_student_averages(data_list) -> list:
         return []
 
 
-
 def calculate_class_averages(data_list) -> list:
     """
     Calculates class averages for each subject in each term.
@@ -114,6 +115,7 @@ def calculate_class_averages(data_list) -> list:
 
     return class_averages_list
 
+
 def identify_highest_achieving_students(data_list) -> list:
     """
     Identifies highest-achieving student for each subject in each term.
@@ -146,6 +148,7 @@ def identify_highest_achieving_students(data_list) -> list:
                 ])
     
     return highest_achieving_students_list
+
 
 def identify_lowest_achieving_students(data_list) -> list:
     """
@@ -180,6 +183,7 @@ def identify_lowest_achieving_students(data_list) -> list:
                 ])
     
     return lowest_achieving_students_list
+
 
 def analyze_performance_trends(data_list) -> list:
     """
@@ -221,6 +225,7 @@ def analyze_performance_trends(data_list) -> list:
     
     return performance_trend_list
 
+
 def get_most_improved_student(student_averages) -> int:
     """
     Find the student with the most significant improvement across all.
@@ -238,7 +243,7 @@ def get_most_improved_student(student_averages) -> int:
             student_term_avg[sid] = {'1': None, '2': None}
         student_term_avg[sid][term] = avg
     
-    """Calculates improvement"""
+    """Calculates improvements"""
     improvements = []
     for sid, terms in student_term_avg.items():
         if terms['1'] is not None and terms['2'] is not None:
@@ -247,6 +252,7 @@ def get_most_improved_student(student_averages) -> int:
     
     """Returns SID of most improved student"""
     return max(improvements, key=lambda x: x[1])[0] if improvements else None
+
 
 """Main function"""
 def main():
