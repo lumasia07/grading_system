@@ -257,7 +257,7 @@ def get_most_improved_student(student_averages) -> int:
 """Main function"""
 def main():
     """Prompt user for CSV file name"""
-    csv_file_name = input("Please input a CSV file name: ")
+    csv_file_name = input("Please input a CSV file name: \n")
     
     """Read data from given CSV file"""
     data_list = get_data_list(csv_file_name)
