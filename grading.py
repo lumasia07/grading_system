@@ -2,9 +2,10 @@
 import csv
 import sys
 
+"""List of subjects"""
 subjects = ['Chi', 'Eng', 'Math', 'GS', 'CS', 'Music', 'VA', 'PE']
 
-def get_data_list(csv_file_name):
+def get_data_list(csv_file_name) -> list:
     """
     Reads data contained in a CSV file & returns a list of lists containing student performance data.
     Args:
@@ -25,7 +26,7 @@ def get_data_list(csv_file_name):
         print(f"Error: File {csv_file_name} not found. Please try again!!\n")
         sys.exit(1)
 
-def calculate_student_averages(data_list):
+def calculate_student_averages(data_list) -> list:
     """
     Calculates average scores for each student in each term.
 
@@ -77,7 +78,7 @@ def calculate_student_averages(data_list):
 
 
 
-def calculate_class_averages(data_list):
+def calculate_class_averages(data_list) -> list:
     """
     Calculates class averages for each subject in each term.
     
@@ -113,7 +114,7 @@ def calculate_class_averages(data_list):
 
     return class_averages_list
 
-def identify_highest_achieving_students(data_list):
+def identify_highest_achieving_students(data_list) -> list:
     """
     Identifies highest-achieving student for each subject in each term.
     Args:
@@ -146,7 +147,7 @@ def identify_highest_achieving_students(data_list):
     
     return highest_achieving_students_list
 
-def identify_lowest_achieving_students(data_list):
+def identify_lowest_achieving_students(data_list) -> list:
     """
     Identifies lowest-achieving student for each subject in each term.
     Args:
@@ -180,7 +181,7 @@ def identify_lowest_achieving_students(data_list):
     
     return lowest_achieving_students_list
 
-def analyze_performance_trends(data_list):
+def analyze_performance_trends(data_list) -> list:
     """
     Analyzes class performance trends across the terms.
     Args:
@@ -220,7 +221,7 @@ def analyze_performance_trends(data_list):
     
     return performance_trend_list
 
-def get_most_improved_student(student_averages):
+def get_most_improved_student(student_averages) -> int:
     """
     Find the student with the most significant improvement across all.
     Args:
