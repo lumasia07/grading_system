@@ -306,7 +306,7 @@ def main():
         f.write(f"The SID is {lowest_cs_student_term_two}\n")
         f.write(f"The subject is {highest_trend_subject}\n")
     
-    print("Analysis complete\n.Results written to StudentScoresAnalysis.txt\n")
+    print("\nAnalysis successfuly completed :) \n\nResults written to StudentScoresAnalysis.txt\n")
 
 if __name__ == "__main__":
     main()
