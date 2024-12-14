@@ -259,7 +259,7 @@ def main():
     """Prompt user for CSV file name"""
     csv_file_name = input("Please input a CSV file name: \n")
     
-    """Read data from given CSV file"""
+    """Reads data from given CSV file"""
     data_list = get_data_list(csv_file_name)
     
     """"Performance analyses"""
@@ -268,8 +268,6 @@ def main():
     highest_students = identify_highest_achieving_students(data_list)
     lowest_students = identify_lowest_achieving_students(data_list)
     performance_trends = analyze_performance_trends(data_list)
-    
-    """Find most improved student"""
     most_improved_student = get_most_improved_student(student_averages)
     
     """Find subject with highest Term 1 average"""
